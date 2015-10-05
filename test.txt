@@ -3,4 +3,5 @@ test data
 my changes to file
 =======
 some data added by Ivan
+another data// Testing #3
 >>>>>>> origin/master
