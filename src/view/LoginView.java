@@ -39,7 +39,7 @@ public class LoginView {
 		panel.add(imagePanel);
 		//add button panel
 		JPanel buttonPanel=new JPanel();
-		JButton loginButton=new JButton("¬ход");
+		JButton loginButton=new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

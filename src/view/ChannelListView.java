@@ -36,7 +36,7 @@ public class ChannelListView {
 		
 		frame=new Frame(Global.PROGRAM_CAPTION_STRING, new Dimension(525, 520), 0, JFrame.EXIT_ON_CLOSE, null);
 		//create channel table
-		Object[] channelTableColumn={"Канал", "Доступно"};
+		Object[] channelTableColumn={"Channel", "Available"};
 		channelTableModel=new NonEditableTableModel(null, channelTableColumn);
 		JTable channelTable=new JTable(channelTableModel);
 		//add double click action
