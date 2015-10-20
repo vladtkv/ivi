@@ -1,6 +1,6 @@
-package view;
+package ivi.view;
 
-import global.Global;
+import ivi.global.Global;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,11 +19,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-import model.MainModel;
-import model.type.Channel;
-import swing.ChannelTableColorCellRenderer;
-import swing.Frame;
-import swing.NonEditableTableModel;
+import ivi.model.MainModel;
+import ivi.model.type.Channel;
+import ivi.swing.ChannelTableColorCellRenderer;
+import ivi.swing.Frame;
+import ivi.swing.NonEditableTableModel;
 
 public class ChannelListView {
 	private final Color BACKGROUND_COLOR=new Color(200,221,242);

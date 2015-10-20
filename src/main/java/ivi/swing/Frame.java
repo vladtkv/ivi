@@ -1,4 +1,4 @@
-package swing;
+package ivi.swing;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;

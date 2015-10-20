@@ -1,10 +1,10 @@
-package view;
+package ivi.view;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import global.Global;
+import ivi.global.Global;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,9 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.LoginModel;
-import swing.Frame;
-import swing.ImageComponent;
+import ivi.model.LoginModel;
+import ivi.swing.Frame;
+import ivi.swing.ImageComponent;
 
 public class LoginView {
 	private Frame frame;
@@ -34,7 +34,7 @@ public class LoginView {
 		panel.add(Box.createVerticalGlue());
 		//add google image
 		JPanel imagePanel=new JPanel();
-		imagePanel.add(new ImageComponent("img/google_logo.png", new Dimension(200, 70)));
+		imagePanel.add(new ImageComponent("src/main/resources/img/google_logo.png", new Dimension(200, 70)));
 		//
 		panel.add(imagePanel);
 		//add button panel

@@ -1,4 +1,4 @@
-package swing;
+package ivi.swing;
 
 import javax.swing.table.DefaultTableModel;
 

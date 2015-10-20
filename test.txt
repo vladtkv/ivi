@@ -1,6 +1,0 @@
-test data
-<<<<<<< HEAD
-my changes to file
-=======
-some data added by Ivan
->>>>>>> origin/master

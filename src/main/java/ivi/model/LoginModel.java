@@ -1,10 +1,10 @@
-package model;
+package ivi.model;
 
-import global.Global;
+import ivi.global.Global;
 
 import javax.swing.JOptionPane;
 
-import view.LoginView;
+import ivi.view.LoginView;
 
 public class LoginModel {
 	private LoginView loginView;

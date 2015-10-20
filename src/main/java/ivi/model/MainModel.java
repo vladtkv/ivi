@@ -1,11 +1,11 @@
-package model;
+package ivi.model;
 
-import global.Global;
+import ivi.global.Global;
 
 import javax.swing.JOptionPane;
 
-import model.type.Channel;
-import view.ChannelListView;
+import ivi.model.type.Channel;
+import ivi.view.ChannelListView;
 
 public class MainModel {
 	private ChannelListView channelListView;

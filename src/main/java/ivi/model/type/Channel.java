@@ -1,4 +1,4 @@
-package model.type;
+package ivi.model.type;
 
 public class Channel {
 	private String channelCaption;
