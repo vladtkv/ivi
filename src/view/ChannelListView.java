@@ -4,6 +4,7 @@ import global.Global;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -16,9 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
 import model.MainModel;
 import model.type.Channel;
+import swing.ChannelTableColorCellRenderer;
 import swing.Frame;
 import swing.NonEditableTableModel;
 
@@ -38,7 +41,20 @@ public class ChannelListView {
 		//create channel table
 		Object[] channelTableColumn={"Channel", "Available"};
 		channelTableModel=new NonEditableTableModel(null, channelTableColumn);
-		JTable channelTable=new JTable(channelTableModel);
+		JTable channelTable=new JTable(channelTableModel){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			//add highlighting feature
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column){
+				if(column==1){
+					return super.prepareRenderer(new ChannelTableColorCellRenderer(), row, column);
+				}
+				return super.prepareRenderer(renderer, row, column);	
+			}
+		};
 		//add double click action
 		channelTable.addMouseListener(new MouseAdapter() {
 			@Override
