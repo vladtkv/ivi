@@ -1,9 +1,8 @@
 package ivi.model;
 
-import ivi.global.Global;
-
 import javax.swing.JOptionPane;
 
+import ivi.Program;
 import ivi.model.type.Channel;
 import ivi.view.ChannelListView;
 
@@ -19,6 +18,6 @@ public class MainModel {
 		channelListView.addChannelData(new Channel("Don`t forget about study !!!", 15));
 	}
 	public void accessChannelWebPage(){
-		JOptionPane.showMessageDialog(null, "<REDIRECT TO THE YOUTUBE CHANNEL WEB PAGE>", Global.PROGRAM_CAPTION_STRING, JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "<REDIRECT TO THE YOUTUBE CHANNEL WEB PAGE>", Program.PROGRAM_CAPTION_STRING, JOptionPane.INFORMATION_MESSAGE);
 	}
 }

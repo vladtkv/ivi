@@ -1,9 +1,8 @@
 package ivi.model;
 
-import ivi.global.Global;
-
 import javax.swing.JOptionPane;
 
+import ivi.Program;
 import ivi.view.LoginView;
 
 public class LoginModel {
@@ -14,7 +13,7 @@ public class LoginModel {
 		loginView.open();
 	}
 	public void login(){
-		JOptionPane.showMessageDialog(null, "<YOU HAVE SUCCESSFULLY LOGGED IN ! >", Global.PROGRAM_CAPTION_STRING, JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "<YOU HAVE SUCCESSFULLY LOGGED IN ! >", Program.PROGRAM_CAPTION_STRING, JOptionPane.INFORMATION_MESSAGE);
 		loginView.close();
 		//use youtube api to access service data
 		//create main model

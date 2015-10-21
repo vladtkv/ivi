@@ -3,7 +3,6 @@ package ivi.swing;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -18,7 +17,7 @@ public class ImageComponent extends JComponent{
 	private Dimension dimension;
 	public ImageComponent(String imgSrc, Dimension d){
 		try {
-			image = ImageIO.read(new File(imgSrc));
+			image=ImageIO.read(getClass().getResourceAsStream(imgSrc));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

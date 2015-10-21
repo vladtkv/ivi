@@ -1,7 +1,6 @@
 package ivi.view;
 
-import ivi.global.Global;
-
+import ivi.Program;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -37,7 +36,7 @@ public class ChannelListView {
 	public ChannelListView(MainModel mm){
 		mainModel=mm;
 		
-		frame=new Frame(Global.PROGRAM_CAPTION_STRING, new Dimension(525, 520), 0, JFrame.EXIT_ON_CLOSE, null);
+		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(525, 520), 0, JFrame.EXIT_ON_CLOSE, null);
 		//create channel table
 		Object[] channelTableColumn={"Channel", "Available"};
 		channelTableModel=new NonEditableTableModel(null, channelTableColumn);
@@ -78,7 +77,7 @@ public class ChannelListView {
 		footerPanel.setLayout(footerLayout);
 		JLabel devLabel=new JLabel("IVI Developers Team");
 		devLabel.setFont(FONT_PLAIN);
-		JLabel verLabel=new JLabel("ver. <ALPHA>");
+		JLabel verLabel=new JLabel(Program.version);
 		verLabel.setFont(FONT_PLAIN);
 		footerPanel.add(Box.createHorizontalStrut(10));
 		footerPanel.add(devLabel);
