@@ -11,6 +11,12 @@ The IVI YouTube Client can automatically check your YouTube account subscription
 
 This guide will show you how to build this project using Windows command line.
 
+To successfully build the project you need the following tools:
+
+ - JDK 8
+ - Maven
+ - Git
+
 First clone the repository:
 
     git clone https://github.com/vladtkv/ivi.git
