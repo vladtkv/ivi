@@ -42,25 +42,25 @@ public class VersionMojo extends AbstractMojo
  			throw new RuntimeException(e); 
  		} 		
  		getLog().info("Version-" +version);
- 		//save version to file
+ 		//save version to Version.class
  		String root=new File("").getAbsolutePath();
- 		File dir=new File(root+"/target");
+ 		File dir=new File(root+"/target/generated-sources/");
  		if(!dir.exists())
-			dir.mkdir();
- 		dir=new File(root+"/target/generated-sources");
- 		System.out.println(dir.getAbsolutePath());
- 		if(!dir.exists())
-			dir.mkdir();
- 		File file=new File("target/generated-sources/version.dat");
+			dir.mkdirs();
+ 		File file=new File("target/generated-sources/Version.java");
+ 		getLog().info("Generating version class.");
  		try {
 			OutputStream out=new FileOutputStream(file);
-			out.write(version.getBytes());
+			out.write("package ivi;public class Version {".getBytes());
+			out.write("public static final String PROGRAM_VERSION=\"".getBytes());
+			out.write((version+"\";").getBytes());
+			out.write("}".getBytes());
 			out.flush();
 			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- 		getLog().info("Saved to file.");
+ 		getLog().info("Done.");
 	}
 }
