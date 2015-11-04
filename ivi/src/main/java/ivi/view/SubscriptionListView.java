@@ -1,6 +1,7 @@
 package ivi.view;
 
 import ivi.Program;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,29 +19,30 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
+import com.google.api.services.youtube.model.Subscription;
+
 import ivi.model.MainModel;
-import ivi.model.type.Channel;
 import ivi.swing.ChannelTableColorCellRenderer;
 import ivi.swing.Frame;
 import ivi.swing.NonEditableTableModel;
 
-public class ChannelListView {
+public class SubscriptionListView {
 	private final Color BACKGROUND_COLOR=new Color(200,221,242);
 	private final Font FONT_BOLD=new Font("Verdana", Font.BOLD, 15);
 	private final Font FONT_PLAIN=new Font("Verdana", Font.PLAIN, 15);
 	private Frame frame;
 	private JPanel mainPanel=new JPanel();
 	private JPanel footerPanel=new JPanel();
-	private NonEditableTableModel channelTableModel;
+	private NonEditableTableModel subscriptionTableModel;
 	private MainModel mainModel;
-	public ChannelListView(MainModel mm){
+	public SubscriptionListView(MainModel mm){
 		mainModel=mm;
 		
 		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(525, 520), 0, JFrame.EXIT_ON_CLOSE, null);
 		//create channel table
-		Object[] channelTableColumn={"Channel", "Available"};
-		channelTableModel=new NonEditableTableModel(null, channelTableColumn);
-		JTable channelTable=new JTable(channelTableModel){
+		Object[] subscriptionTableColumn={"Subscrition", "Available"};
+		subscriptionTableModel=new NonEditableTableModel(null, subscriptionTableColumn);
+		JTable subscriptionTable=new JTable(subscriptionTableModel){
 			/**
 			 * 
 			 */
@@ -55,7 +57,7 @@ public class ChannelListView {
 			}
 		};
 		//add double click action
-		channelTable.addMouseListener(new MouseAdapter() {
+		subscriptionTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (e.getButton()==1 && e.getClickCount() == 2) {
@@ -63,13 +65,13 @@ public class ChannelListView {
 				}
 		    }
 		});
-		channelTable.getColumnModel().getColumn(0).setMaxWidth(400);
-		channelTable.getColumnModel().getColumn(1).setMaxWidth(100);
-		channelTable.setRowHeight(25);
-		channelTable.getTableHeader().setFont(FONT_BOLD);
-		channelTable.getTableHeader().setBackground(BACKGROUND_COLOR);
-		channelTable.setFont(FONT_PLAIN);
-		JScrollPane channelScrollPane=new JScrollPane(channelTable);
+		subscriptionTable.getColumnModel().getColumn(0).setMaxWidth(400);
+		subscriptionTable.getColumnModel().getColumn(1).setMaxWidth(100);
+		subscriptionTable.setRowHeight(25);
+		subscriptionTable.getTableHeader().setFont(FONT_BOLD);
+		subscriptionTable.getTableHeader().setBackground(BACKGROUND_COLOR);
+		subscriptionTable.setFont(FONT_PLAIN);
+		JScrollPane channelScrollPane=new JScrollPane(subscriptionTable);
 		channelScrollPane.setAutoscrolls(true);
 		channelScrollPane.setPreferredSize(new Dimension(500,445));
 		//create footer
@@ -92,7 +94,8 @@ public class ChannelListView {
 	public void open(){
 		frame.setVisible(true);
 	}
-	public void addChannelData(Channel channel){
-		channelTableModel.addRow(channel.getData());
+	public void addSubscriptionData(Subscription subscrition){
+		Object[] data={subscrition.getSnippet().getTitle(), -1};
+		subscriptionTableModel.addRow(data);
 	}
 }
