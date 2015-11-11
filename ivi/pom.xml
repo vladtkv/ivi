@@ -4,7 +4,7 @@
   <groupId>ivi</groupId>
   <artifactId>ivi</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <name>ivi</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -92,7 +92,26 @@
             	</configuration>
         	</execution>
     	</executions>
-	  </plugin>      
+	  </plugin> 
+	  <plugin>
+    	<groupId>org.apache.maven.plugins</groupId>
+    	<artifactId>maven-dependency-plugin</artifactId>
+    	<executions>
+        	<execution>
+            	<id>copy-dependencies</id>
+            	<phase>prepare-package</phase>
+            	<goals>
+               		<goal>copy-dependencies</goal>
+            	</goals>
+            	<configuration>
+                	<outputDirectory>${project.build.directory}/libs</outputDirectory>
+                	<overWriteReleases>false</overWriteReleases>
+                	<overWriteSnapshots>false</overWriteSnapshots>
+                	<overWriteIfNewer>true</overWriteIfNewer>
+            	</configuration>
+       		</execution>
+    	</executions>
+	  </plugin>	       
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -100,6 +119,8 @@
           <archive>
             <manifest>
               <mainClass>ivi.Program</mainClass>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>libs</classpathPrefix>        
             </manifest>
           </archive>
         </configuration>
