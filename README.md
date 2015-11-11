@@ -14,7 +14,7 @@ This guide will show you how to build this project using Windows command line.
 To successfully build the project you need the following tools:
 
  - JDK 8
- - Maven
+ - Maven (https://maven.apache.org/)
  - Git
 
 First clone the repository:
@@ -36,11 +36,7 @@ After that you are ready to build main IVI project. Change directory to the main
 
     cd ..\ivi
 
-Last step is the project compilation:
-
-    mvn compile
-
-If you want to get the project in jar-file, please use this command:
+Finally, execute this command. You will get executable jar file and all required libraries placed in “libs” folder:
 
     mvn package
 
