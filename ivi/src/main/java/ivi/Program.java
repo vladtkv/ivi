@@ -1,10 +1,12 @@
 package ivi;
 
 import ivi.model.LoginModel;
+import ivi.youtube.GoogleAuthorizer;
 
 public class Program {
 	public static String version;
 	public static final String PROGRAM_CAPTION_STRING="IVI YouTube Client";
+	private static LoginModel loginModel;
 	public static void main(String... args){
 		//load Version.class to get PROGRAM_VERSION constant
 		try {
@@ -13,6 +15,7 @@ public class Program {
 		} catch (ClassNotFoundException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		new LoginModel();
+		loginModel=new LoginModel(new GoogleAuthorizer());
+		loginModel.openView();
 	}
 }

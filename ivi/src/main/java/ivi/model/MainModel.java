@@ -20,7 +20,6 @@ public class MainModel {
 	public MainModel(YouTube yt){
 		youtube=yt;
 		subscriptionListView=new SubscriptionListView(this);
-		subscriptionListView.open();
 		
 		List<Subscription> youTubeSubscriptionList=getSubscriptionList();
 		if(youTubeSubscriptionList!=null){
@@ -29,6 +28,9 @@ public class MainModel {
 				subscriptionListView.addSubscriptionData(iterator.next());
 			}
 		}
+	}
+	public void openView(){
+		subscriptionListView.open();
 	}
 	public void accessChannelWebPage(){
 		JOptionPane.showMessageDialog(null, "<REDIRECT TO THE YOUTUBE WEB PAGE>", Program.PROGRAM_CAPTION_STRING, JOptionPane.INFORMATION_MESSAGE);

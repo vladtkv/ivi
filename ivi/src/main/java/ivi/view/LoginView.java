@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ivi.Program;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import ivi.model.LoginModel;
@@ -42,7 +44,8 @@ public class LoginView {
 		loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loginModel.login();
+				if(!loginModel.login())
+					JOptionPane.showMessageDialog(null, "There was an error while connecting to the YouTube service!", Program.PROGRAM_CAPTION_STRING, JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		buttonPanel.add(loginButton);

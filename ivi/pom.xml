@@ -4,7 +4,7 @@
   <groupId>ivi</groupId>
   <artifactId>ivi</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.3</version>
+  <version>0.1.0</version>
   <name>ivi</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -23,8 +23,13 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.5</version>
     </dependency>
     <!-- YouTube Data V3 support -->
     <dependency>

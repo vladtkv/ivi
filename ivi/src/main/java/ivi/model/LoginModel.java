@@ -1,50 +1,33 @@
 package ivi.model;
 
-import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.services.youtube.YouTube;
-import com.google.common.collect.Lists;
-
-import ivi.Program;
 import ivi.view.LoginView;
-import ivi.youtube.Auth;
+import ivi.youtube.GoogleAuthorizer;
 
 public class LoginModel {
 	private LoginView loginView;
-	public LoginModel(){
-		//open login view
+	private GoogleAuthorizer google;
+	public LoginModel(GoogleAuthorizer g){
+		google=g;
+		//create login view
 		loginView=new LoginView(this);
+	}
+	public void openView(){
 		loginView.open();
 	}
-	public void login(){
-		//Use YouTube API to access service data
-		// This OAuth 2.0 access scope allows for read-only access to the
-        // authenticated user's account, but not other types of account access.
-        List<String> scopes = Lists.newArrayList("https://www.googleapis.com/auth/youtube.readonly");
-        YouTube youtube=null;
-		try {
-			Credential credential=Auth.authorize(scopes, "mysubscriptions");
-			youtube = new YouTube.Builder(Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, credential).setApplicationName("ivi-youtube-client").build();
-			
-		} catch (GoogleJsonResponseException e) {
-            e.printStackTrace();
-            System.err.println("There was a service error: " + e.getDetails().getCode() + " : "
-                    + e.getDetails().getMessage());
-
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-		//Create main model
-		if(youtube!=null){
-			new MainModel(youtube);
+	public boolean login(){ 
+		Credential credential=google.authorize();
+		if(credential!=null){
+			YouTube youtube=google.getYouTubeObject(credential);
+			//Create main model
+			MainModel mainModel=new MainModel(youtube);
+			mainModel.openView();
 			loginView.close();
+			return true;
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "There was an error while connecting to the YouTube service!", Program.PROGRAM_CAPTION_STRING, JOptionPane.WARNING_MESSAGE);
-		}			
-	}
+			return false;
+		}
+	}	
 }

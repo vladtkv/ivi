@@ -94,8 +94,16 @@ public class SubscriptionListView {
 	public void open(){
 		frame.setVisible(true);
 	}
-	public void addSubscriptionData(Subscription subscrition){
-		Object[] data={subscrition.getSnippet().getTitle(), -1};
-		subscriptionTableModel.addRow(data);
+	public boolean addSubscriptionData(Subscription subscrition){
+		if(subscrition!=null){
+			Object[] data={subscrition.getSnippet().getTitle(), -1};
+			subscriptionTableModel.addRow(data);
+			return true;
+		}
+		else
+			return false;
+	}
+	protected int getSubscriptionTableRowCount(){
+		return subscriptionTableModel.getRowCount();
 	}
 }
