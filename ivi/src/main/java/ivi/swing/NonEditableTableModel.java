@@ -12,10 +12,7 @@ public class NonEditableTableModel extends DefaultTableModel{
 	}
 	@Override
 	public Class<?> getColumnClass(int column){
-		if(column==1)
-			return Integer.class;
-		else
-			return String.class;
+		return super.getColumnClass(column);
 	}
 		
 	@Override

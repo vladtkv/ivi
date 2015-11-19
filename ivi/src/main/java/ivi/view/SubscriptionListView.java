@@ -4,7 +4,6 @@ import ivi.Program;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -17,12 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-
 import com.google.api.services.youtube.model.Subscription;
 
 import ivi.model.MainModel;
-import ivi.swing.ChannelTableColorCellRenderer;
 import ivi.swing.Frame;
 import ivi.swing.NonEditableTableModel;
 
@@ -35,45 +31,39 @@ public class SubscriptionListView {
 	private JPanel footerPanel=new JPanel();
 	private NonEditableTableModel subscriptionTableModel;
 	private MainModel mainModel;
+	private final String DETAILED_LABEL=new String("<html><i><u>Show detailed</u></i></html>");
 	public SubscriptionListView(MainModel mm){
 		mainModel=mm;
 		
-		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(525, 520), 0, JFrame.EXIT_ON_CLOSE, null);
+		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(535, 520), 0, JFrame.EXIT_ON_CLOSE, null);
 		//create channel table
-		Object[] subscriptionTableColumn={"Subscrition", "Available"};
+		Object[] subscriptionTableColumn={"Subscrition", ""};
 		subscriptionTableModel=new NonEditableTableModel(null, subscriptionTableColumn);
-		JTable subscriptionTable=new JTable(subscriptionTableModel){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			//add highlighting feature
-			@Override
-			public Component prepareRenderer(TableCellRenderer renderer, int row, int column){
-				if(column==1){
-					return super.prepareRenderer(new ChannelTableColorCellRenderer(), row, column);
-				}
-				return super.prepareRenderer(renderer, row, column);	
-			}
-		};
+		JTable subscriptionTable=new JTable(subscriptionTableModel);
 		//add double click action
 		subscriptionTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (e.getButton()==1 && e.getClickCount() == 2) {
-					mainModel.accessChannelWebPage();
+					mainModel.accessChannelVideoList(subscriptionTable.getSelectedRow());
 				}
 		    }
 		});
-		subscriptionTable.getColumnModel().getColumn(0).setMaxWidth(400);
-		subscriptionTable.getColumnModel().getColumn(1).setMaxWidth(100);
+		subscriptionTable.getColumnModel().getColumn(0).setMinWidth(385);
+		subscriptionTable.getColumnModel().getColumn(1).setMinWidth(115);
 		subscriptionTable.setRowHeight(25);
 		subscriptionTable.getTableHeader().setFont(FONT_BOLD);
 		subscriptionTable.getTableHeader().setBackground(BACKGROUND_COLOR);
 		subscriptionTable.setFont(FONT_PLAIN);
+		JPanel tablePanel=new JPanel();
+		BoxLayout tablePanelLayout=new BoxLayout(tablePanel, BoxLayout.X_AXIS);
+		tablePanel.setLayout(tablePanelLayout);
 		JScrollPane channelScrollPane=new JScrollPane(subscriptionTable);
 		channelScrollPane.setAutoscrolls(true);
-		channelScrollPane.setPreferredSize(new Dimension(500,445));
+		channelScrollPane.setPreferredSize(new Dimension(500,425));
+		tablePanel.add(Box.createHorizontalGlue());
+		tablePanel.add(channelScrollPane);
+		tablePanel.add(Box.createHorizontalGlue());
 		//create footer
 		BoxLayout footerLayout=new BoxLayout(footerPanel, BoxLayout.X_AXIS);
 		footerPanel.setLayout(footerLayout);
@@ -81,13 +71,16 @@ public class SubscriptionListView {
 		devLabel.setFont(FONT_PLAIN);
 		JLabel verLabel=new JLabel(Program.version);
 		verLabel.setFont(FONT_PLAIN);
-		footerPanel.add(Box.createHorizontalStrut(10));
+		footerPanel.add(Box.createHorizontalStrut(5));
 		footerPanel.add(devLabel);
 		footerPanel.add(Box.createHorizontalGlue());
 		footerPanel.add(verLabel);
-		footerPanel.add(Box.createHorizontalStrut(10));
-		
-		mainPanel.add(channelScrollPane);
+		footerPanel.add(Box.createHorizontalStrut(5));
+		//main panel config
+		BoxLayout mainPanelLayout=new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
+		mainPanel.setLayout(mainPanelLayout);
+		mainPanel.add(Box.createVerticalStrut(5));
+		mainPanel.add(tablePanel);
 		frame.add(mainPanel, BorderLayout.CENTER);
 		frame.add(footerPanel, BorderLayout.SOUTH);
 	}
@@ -96,7 +89,7 @@ public class SubscriptionListView {
 	}
 	public boolean addSubscriptionData(Subscription subscrition){
 		if(subscrition!=null){
-			Object[] data={subscrition.getSnippet().getTitle(), -1};
+			Object[] data={subscrition.getSnippet().getTitle(), DETAILED_LABEL};
 			subscriptionTableModel.addRow(data);
 			return true;
 		}
