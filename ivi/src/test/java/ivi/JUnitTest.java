@@ -24,6 +24,16 @@ public class JUnitTest {
 	}
 	
 	@Test
+	public void theBestTestInTheTestWorld(){
+		String s1 = "SKR";
+		String s2 = s1;
+		String s3 = new String("SKR");
+		Assert.assertEquals("SKR", s1);
+		Assert.assertEquals(s1, s2);
+		Assert.assertEquals(s2, s3);
+	}
+	
+	@Test
 	public void testForTest(){
 		int var1 = 6;
 		Assert.assertEquals(1, var1^7);
