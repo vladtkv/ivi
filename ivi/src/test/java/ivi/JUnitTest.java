@@ -22,4 +22,10 @@ public class JUnitTest {
 		verify(googleAuthorizerMock).authorize();
 		verify(googleAuthorizerMock, never()).getYouTubeObject(null);
 	}
+	
+	@Test
+	public void testForTest(){
+		int var1 = 6;
+		Assert.assertEquals(1, var1^7);
+	}
 }
