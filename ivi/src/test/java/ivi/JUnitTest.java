@@ -3,24 +3,22 @@ package ivi;
 import ivi.model.LoginModel;
 import ivi.view.SubscriptionListView;
 import ivi.youtube.GoogleAuthorizer;
-
 import org.junit.*;
-
 import com.google.api.services.youtube.model.Subscription;
 import com.google.api.services.youtube.model.SubscriptionSnippet;
-
 import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchResult;
-
 import static org.mockito.Mockito.*;
 
 public class JUnitTest {
+	
 	private static LoginModel lm;
 	private static GoogleAuthorizer googleAuthorizerMock;
 	private Subscription sub;
 	private SubscriptionSnippet subSnip;
 	private SubscriptionListView subListView;
 	private static SearchResult searchRes;
+	
 	@BeforeClass
 	public static void initTest(){
 		googleAuthorizerMock=mock(GoogleAuthorizer.class);
@@ -28,6 +26,7 @@ public class JUnitTest {
 		searchRes = new SearchResult();
 		searchRes.setId(new ResourceId().setVideoId("TestVideoID"));
 	}
+	
 	@Test
 	public void authentificationFailedTest(){
 		doReturn(null).when(googleAuthorizerMock).authorize();
