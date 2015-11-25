@@ -3,7 +3,7 @@ package ivi.view;
 import ivi.Program;
 import ivi.model.MainModel;
 import ivi.swing.Frame;
-import ivi.swing.NonEditableTableModel;
+import ivi.swing.NonEditableVideoTableModel;
 import ivi.swing.TableDateCellRenderer;
 
 import java.awt.BorderLayout;
@@ -21,6 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VideoListView {
 	private final Color BACKGROUND_COLOR=new Color(200,221,242);
@@ -29,16 +32,18 @@ public class VideoListView {
 	private Frame frame;
 	private JPanel mainPanel=new JPanel();
 	private JPanel footerPanel=new JPanel();
-	private NonEditableTableModel videoTableModel;
+	private JTable videoTable;
+	private NonEditableVideoTableModel videoTableModel;
 	private MainModel mainModel;
+	private boolean rowSorterEnabled=false;
 	public VideoListView(MainModel mm){
 		mainModel=mm;
 		
 		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(725, 620), 0, JFrame.DISPOSE_ON_CLOSE, null);
 		//create channel table
 		Object[] subscriptionTableColumn={"Video", "Published"};
-		videoTableModel=new NonEditableTableModel(null, subscriptionTableColumn);
-		JTable videoTable=new JTable(videoTableModel);
+		videoTableModel=new NonEditableVideoTableModel(null, subscriptionTableColumn);
+		videoTable=new JTable(videoTableModel);
 		//add double click action
 		videoTable.addMouseListener(new MouseAdapter() {
 			@Override
@@ -83,6 +88,15 @@ public class VideoListView {
 	}
 	public void addVideo(Object[] data){
 		videoTableModel.addRow(data);
+	}
+	public void enableRowSorter(){
+		if(!rowSorterEnabled){
+			RowSorter<TableModel> sorter=new TableRowSorter<TableModel>(videoTableModel);
+			videoTable.setRowSorter(sorter);
+			sorter.toggleSortOrder(1);
+			sorter.toggleSortOrder(1);
+			rowSorterEnabled=true;
+		}
 	}
 	public void clearVideoTable(){
 //		int rowCount=videoTableModel.getRowCount();

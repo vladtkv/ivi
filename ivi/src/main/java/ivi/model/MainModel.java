@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Subscription;
 import com.google.api.services.youtube.model.SubscriptionListResponse;
+
 import ivi.view.SubscriptionListView;
 import ivi.view.VideoListView;
 
@@ -45,6 +47,7 @@ public class MainModel {
 	public void accessChannelVideoList(int index){
 		String channelID=subscriptionList.get(index).getSnippet().getResourceId().getChannelId();
 		Object[] data=new Object [2];
+		Date date;
 		if(channelID.compareTo(currentChannelID)!=0){
 			currentChannelID=channelID;
 			videoListView.clearVideoTable();
@@ -54,17 +57,20 @@ public class MainModel {
 			while(iterator.hasNext()){
 				video=iterator.next();
 				data[0]=video.getSnippet().getTitle();
-				data[1]=video.getSnippet().getPublishedAt();
+				date=new Date();
+				date.setTime(video.getSnippet().getPublishedAt().getValue());
+				data[1]=date;
 				videoListView.addVideo(data);
 			}
 		}
+		videoListView.enableRowSorter();
 		videoListView.open();
 	}
 	public boolean openBrowser(int index){
 		if(desktop!=null)
 		{
 			try {
-				desktop.browse(new URI("https://www.youtube.com/watch?v="+videoList.get(index).getId().getVideoId()));
+				desktop.browse(new URI(getVideoURL(videoList.get(index))));
 				return true;
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -73,6 +79,9 @@ public class MainModel {
 			}
 		}
 		return false;
+	}
+	private String getVideoURL(SearchResult searchResult){
+		return "https://www.youtube.com/watch?v="+searchResult.getId().getVideoId();
 	}
 	public List<Subscription> getSubscriptionList(){
 		try {
