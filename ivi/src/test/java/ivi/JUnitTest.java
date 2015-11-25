@@ -5,15 +5,21 @@ import ivi.youtube.GoogleAuthorizer;
 
 import org.junit.*;
 
+import com.google.api.services.youtube.model.ResourceId;
+import com.google.api.services.youtube.model.SearchResult;
+
 import static org.mockito.Mockito.*;
 
 public class JUnitTest {
 	private static LoginModel lm;
 	private static GoogleAuthorizer googleAuthorizerMock;
+	private static SearchResult searchRes;
 	@BeforeClass
 	public static void initTest(){
 		googleAuthorizerMock=mock(GoogleAuthorizer.class);
-		lm=new LoginModel(googleAuthorizerMock);	
+		lm=new LoginModel(googleAuthorizerMock);
+		searchRes = new SearchResult();
+		searchRes.setId(new ResourceId().setVideoId("TestVideoID"));
 	}
 	@Test
 	public void authentificationFailedTest(){
@@ -34,8 +40,8 @@ public class JUnitTest {
 	}
 	
 	@Test
-	public void testForTest(){
-		int var1 = 6;
-		Assert.assertEquals(1, var1^7);
+	public void searchResultTest(){
+		Assert.assertEquals("https://www.youtube.com/watch?v=TestVideoID",
+		"https://www.youtube.com/watch?v="+searchRes.getId().getVideoId());
 	}
 }
