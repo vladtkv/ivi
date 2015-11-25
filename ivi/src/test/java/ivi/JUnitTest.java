@@ -9,6 +9,9 @@ import org.junit.*;
 import com.google.api.services.youtube.model.Subscription;
 import com.google.api.services.youtube.model.SubscriptionSnippet;
 
+import com.google.api.services.youtube.model.ResourceId;
+import com.google.api.services.youtube.model.SearchResult;
+
 import static org.mockito.Mockito.*;
 
 public class JUnitTest {
@@ -17,10 +20,13 @@ public class JUnitTest {
 	private Subscription sub;
 	private SubscriptionSnippet subSnip;
 	private SubscriptionListView subListView;
+	private static SearchResult searchRes;
 	@BeforeClass
 	public static void initTest(){
 		googleAuthorizerMock=mock(GoogleAuthorizer.class);
 		lm=new LoginModel(googleAuthorizerMock);
+		searchRes = new SearchResult();
+		searchRes.setId(new ResourceId().setVideoId("TestVideoID"));
 	}
 	@Test
 	public void authentificationFailedTest(){
@@ -39,5 +45,11 @@ public class JUnitTest {
 		sub.setSnippet(subSnip);
 		Assert.assertEquals(false, subListView.addSubscriptionData(null));
 		Assert.assertEquals(true, subListView.addSubscriptionData(sub));
+	}
+	
+	@Test
+	public void searchResultTest(){
+		Assert.assertEquals("https://www.youtube.com/watch?v=TestVideoID",
+		"https://www.youtube.com/watch?v="+searchRes.getId().getVideoId());
 	}
 }
