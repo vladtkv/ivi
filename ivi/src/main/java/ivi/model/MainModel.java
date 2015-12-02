@@ -26,9 +26,13 @@ public class MainModel {
 	private ArrayList<SearchResult> videoList;
 	private String currentChannelID="";
 	private Desktop desktop=null;
-	public MainModel(YouTube yt){
+	public MainModel(){
+		
+	}
+	public void init(YouTube yt){
 		youtube=yt;
 		subscriptionListView=new SubscriptionListView(this);
+		subscriptionListView.init();
 		videoListView=new VideoListView(this);
 		
 		subscriptionList=(ArrayList<Subscription>) getSubscriptionList();
@@ -80,7 +84,7 @@ public class MainModel {
 		}
 		return false;
 	}
-	private String getVideoURL(SearchResult searchResult){
+	protected String getVideoURL(SearchResult searchResult){
 		return "https://www.youtube.com/watch?v="+searchResult.getId().getVideoId();
 	}
 	public List<Subscription> getSubscriptionList(){

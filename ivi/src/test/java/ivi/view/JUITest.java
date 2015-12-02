@@ -1,6 +1,7 @@
 package ivi.view;
 
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,6 +28,7 @@ public class JUITest {
 	}
 	@Test
 	public void addSubscriptionTest(){
+		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
 		Assert.assertEquals(2, slv.getSubscriptionTableRowCount());
 	}
 }

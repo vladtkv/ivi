@@ -1,18 +1,23 @@
-package ivi;
+package ivi.model;
 
 import ivi.model.LoginModel;
+import ivi.model.MainModel;
 import ivi.view.SubscriptionListView;
 import ivi.youtube.GoogleAuthorizer;
+
 import org.junit.*;
+
 import com.google.api.services.youtube.model.Subscription;
 import com.google.api.services.youtube.model.SubscriptionSnippet;
 import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchResult;
+
 import static org.mockito.Mockito.*;
 
 public class JUnitTest {
 	
 	private static LoginModel lm;
+	private static MainModel mm;
 	private static GoogleAuthorizer googleAuthorizerMock;
 	private Subscription sub;
 	private SubscriptionSnippet subSnip;
@@ -23,6 +28,7 @@ public class JUnitTest {
 	public static void initTest(){
 		googleAuthorizerMock=mock(GoogleAuthorizer.class);
 		lm=new LoginModel(googleAuthorizerMock);
+		mm=new MainModel();
 		searchRes = new SearchResult();
 		searchRes.setId(new ResourceId().setVideoId("TestVideoID"));
 	}
@@ -37,6 +43,7 @@ public class JUnitTest {
 	
 	@Test
 	public void addSubscriptionDataTest(){
+		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
 		subListView = new SubscriptionListView(null);
 		sub = new Subscription();
 		subSnip = new SubscriptionSnippet();
@@ -49,6 +56,6 @@ public class JUnitTest {
 	@Test
 	public void searchResultTest(){
 		Assert.assertEquals("https://www.youtube.com/watch?v=TestVideoID",
-		"https://www.youtube.com/watch?v="+searchRes.getId().getVideoId());
+		mm.getVideoURL(searchRes));
 	}
 }

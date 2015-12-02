@@ -21,7 +21,8 @@ public class LoginModel {
 		if(credential!=null){
 			YouTube youtube=google.getYouTubeObject(credential);
 			//Create main model
-			MainModel mainModel=new MainModel(youtube);
+			MainModel mainModel=new MainModel();
+			mainModel.init(youtube);
 			mainModel.openView();
 			loginView.close();
 			return true;

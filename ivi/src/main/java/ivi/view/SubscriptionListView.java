@@ -34,7 +34,8 @@ public class SubscriptionListView {
 	private final String DETAILED_LABEL=new String("<html><i><u>Show detailed</u></i></html>");
 	public SubscriptionListView(MainModel mm){
 		mainModel=mm;
-		
+	}
+	public void init(){
 		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(535, 520), 0, JFrame.EXIT_ON_CLOSE, null);
 		//create channel table
 		Object[] subscriptionTableColumn={"Subscrition", ""};
