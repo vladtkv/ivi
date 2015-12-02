@@ -45,6 +45,7 @@ public class JUnitTest {
 	public void addSubscriptionDataTest(){
 		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
 		subListView = new SubscriptionListView(null);
+		subListView.init();
 		sub = new Subscription();
 		subSnip = new SubscriptionSnippet();
 		subSnip.setTitle("AWESOME TITLE");
