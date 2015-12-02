@@ -10,10 +10,18 @@ import java.util.Scanner;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 @Mojo( name = "getversion")
 public class VersionMojo extends AbstractMojo
 {
+	/**
+	* The maven project.
+	* 
+	*/
+	@Parameter (defaultValue="${project}")
+	public MavenProject mavenProject;
 	public void execute() throws MojoExecutionException
 	{
 		getLog().info("Getting version." );
@@ -43,12 +51,12 @@ public class VersionMojo extends AbstractMojo
  		} 		
  		getLog().info("Version-" +version);
  		//save version to Version.class
- 		String root=new File("").getAbsolutePath();
+ 		String root=mavenProject.getBasedir().getAbsolutePath();
  		File dir=new File(root+"/target/generated-sources/");
  		if(!dir.exists())
 			dir.mkdirs();
- 		File file=new File("target/generated-sources/Version.java");
- 		getLog().info("Generating version class.");
+ 		File file=new File(root+"/target/generated-sources/Version.java");
+ 		getLog().info("Generating version class in "+file);
  		try {
 			OutputStream out=new FileOutputStream(file);
 			out.write("package ivi;public class Version {".getBytes());
