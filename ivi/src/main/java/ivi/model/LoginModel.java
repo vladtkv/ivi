@@ -8,30 +8,33 @@ import ivi.youtube.GoogleAuthorizer;
 public class LoginModel {
 	private LoginView loginView;
 	private GoogleAuthorizer google;
-	public LoginModel(GoogleAuthorizer g){
-		google=g;
-		//create login view
-		loginView=new LoginView(this);
+
+	public LoginModel(GoogleAuthorizer g) {
+		google = g;
+		// create login view
+		loginView = new LoginView(this);
 	}
-	public void initView(){
+
+	public void initView() {
 		loginView.init();
 	}
-	public void openView(){
+
+	public void openView() {
 		loginView.open();
 	}
-	public boolean login(){ 
-		Credential credential=google.authorize();
-		if(credential!=null){
-			YouTube youtube=google.getYouTubeObject(credential);
-			//Create main model
-			MainModel mainModel=new MainModel();
+
+	public boolean login() {
+		Credential credential = google.authorize();
+		if (credential != null) {
+			YouTube youtube = google.getYouTubeObject(credential);
+			// Create main model
+			MainModel mainModel = new MainModel();
 			mainModel.init(youtube);
 			mainModel.openView();
 			loginView.close();
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
-	}	
+	}
 }

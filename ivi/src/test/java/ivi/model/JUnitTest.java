@@ -15,7 +15,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import static org.mockito.Mockito.*;
 
 public class JUnitTest {
-	
+
 	private static LoginModel lm;
 	private static MainModel mm;
 	private static GoogleAuthorizer googleAuthorizerMock;
@@ -23,27 +23,27 @@ public class JUnitTest {
 	private SubscriptionSnippet subSnip;
 	private SubscriptionListView subListView;
 	private static SearchResult searchRes;
-	
+
 	@BeforeClass
-	public static void initTest(){
-		googleAuthorizerMock=mock(GoogleAuthorizer.class);
-		lm=new LoginModel(googleAuthorizerMock);
-		mm=new MainModel();
+	public static void initTest() {
+		googleAuthorizerMock = mock(GoogleAuthorizer.class);
+		lm = new LoginModel(googleAuthorizerMock);
+		mm = new MainModel();
 		searchRes = new SearchResult();
 		searchRes.setId(new ResourceId().setVideoId("TestVideoID"));
 	}
-	
+
 	@Test
-	public void authentificationFailedTest(){
+	public void authentificationFailedTest() {
 		doReturn(null).when(googleAuthorizerMock).authorize();
 		lm.login();
 		verify(googleAuthorizerMock).authorize();
 		verify(googleAuthorizerMock, never()).getYouTubeObject(null);
 	}
-	
+
 	@Test
-	public void addSubscriptionDataTest(){
-		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
+	public void addSubscriptionDataTest() {
+		Assume.assumeTrue(System.getProperty("ivi.test.uiskip") == null);
 		subListView = new SubscriptionListView(null);
 		subListView.init();
 		sub = new Subscription();
@@ -53,10 +53,10 @@ public class JUnitTest {
 		Assert.assertEquals(false, subListView.addSubscriptionData(null));
 		Assert.assertEquals(true, subListView.addSubscriptionData(sub));
 	}
-	
+
 	@Test
-	public void searchResultTest(){
+	public void searchResultTest() {
 		Assert.assertEquals("https://www.youtube.com/watch?v=TestVideoID",
-		mm.getVideoURL(searchRes));
+				mm.getVideoURL(searchRes));
 	}
 }
