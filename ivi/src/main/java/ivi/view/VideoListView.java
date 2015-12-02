@@ -49,7 +49,7 @@ public class VideoListView {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (e.getButton()==1 && e.getClickCount() == 2) {
-					if(!mainModel.openBrowser(videoTable.getSelectedRow())){
+					if(!mainModel.openBrowser(videoTable.convertRowIndexToModel(videoTable.getSelectedRow()))){
 						JOptionPane.showMessageDialog(null, "There was an error while openning video on YouTube!", Program.PROGRAM_CAPTION_STRING, JOptionPane.WARNING_MESSAGE);
 					}
 				}
