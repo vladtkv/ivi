@@ -12,6 +12,7 @@ public class JUITest {
 	private static SubscriptionListView slv;
 	@BeforeClass
 	public static void initTest(){
+		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
 		slv=new SubscriptionListView(null);
 		//Add test subscriptions
 		Subscription subscriptionA=new Subscription();
@@ -28,7 +29,6 @@ public class JUITest {
 	}
 	@Test
 	public void addSubscriptionTest(){
-		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
 		Assert.assertEquals(2, slv.getSubscriptionTableRowCount());
 	}
 }

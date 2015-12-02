@@ -23,8 +23,9 @@ public class LoginView {
 	private LoginModel loginModel;
 	public LoginView(LoginModel lm){
 		loginModel=lm;
-		
-		frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(350, 425), 0, JFrame.EXIT_ON_CLOSE, null);
+	}
+	public void init(){
+frame=new Frame(Program.PROGRAM_CAPTION_STRING, new Dimension(350, 425), 0, JFrame.EXIT_ON_CLOSE, null);
 		
 		BoxLayout mainPanelLayout=new BoxLayout(mainPanel, BoxLayout.X_AXIS);
 		mainPanel.setLayout(mainPanelLayout);

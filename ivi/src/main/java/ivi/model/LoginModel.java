@@ -13,6 +13,9 @@ public class LoginModel {
 		//create login view
 		loginView=new LoginView(this);
 	}
+	public void initView(){
+		loginView.init();
+	}
 	public void openView(){
 		loginView.open();
 	}

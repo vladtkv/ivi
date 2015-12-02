@@ -16,6 +16,7 @@ public class Program {
 			e.printStackTrace();
 		}
 		loginModel=new LoginModel(new GoogleAuthorizer());
+		loginModel.initView();
 		loginModel.openView();
 	}
 }
