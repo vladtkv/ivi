@@ -14,6 +14,7 @@ public class JUITest {
 	public static void initTest(){
 		Assume.assumeTrue(System.getProperty("ivi.test.uiskip")==null);
 		slv=new SubscriptionListView(null);
+		slv.init();
 		//Add test subscriptions
 		Subscription subscriptionA=new Subscription();
 		SubscriptionSnippet snippetA=new SubscriptionSnippet();
